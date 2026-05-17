@@ -32,7 +32,7 @@ function UserForm() {
                 <input type="text"
                        name="firstName"
                        value={user.firstName}
-                       onChange={handleChange} />
+                       onChange={(e)=>{setUser({...user, firstName: e.target.value})}} />
             </div>
             <div>
                 <label>Last Name: </label>
