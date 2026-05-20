@@ -1,55 +1,75 @@
 import {useState} from 'react';
+import TextFields from './TextFields';
 
-function UserForm() {
+function UserForm({ onAddUser }) {
 
     const [user, setUser] = useState({
         firstName: '',
         lastName: '',
-        email: ''
+        email: '',
+        password: '',
+        confirmPassword: '',
+        dob: ''
     });
 
-    function handleChange(event) {
-        const {name, value} = event.target;
-        console.log('Name: ', name, 'Value: ', value);
+    function handleChange(e) {
+        const {name, value} = e.target;
         setUser({
             ...user,
             [name]: value
         });
-        console.log('User object: ', user);
     }
 
     function handleSubmit(event) {
         event.preventDefault();
-        console.log('User object: ', user);
+        onAddUser(user);
     }
 
   return (
-    <div> 
-        <h2>Add User</h2>
+    <div>
+        <h2>Sign Up</h2>
         <form onSubmit={handleSubmit}>
+            <TextFields 
+                label="First Name:"
+                name="firstName"
+                value={user.firstName}
+                onChange={handleChange}
+            />
+            <TextFields 
+                label="Last Name:"
+                name="lastName"
+                value={user.lastName}
+                onChange={handleChange}
+            />
             <div>
-                <label>First Name: </label>
-                <input type="text"
-                       name="firstName"
-                       value={user.firstName}
-                       onChange={handleChange} />
-            </div>
-            <div>
-                <label>Last Name: </label>
-                <input type="text"
-                       name="lastName"
-                       value={user.lastName}
-                       onChange={handleChange}/>
-            </div>
-            <div>
-                <label>Email: </label>
+                <label>Email:</label>
                 <input type="email"
                        name="email"
                        value={user.email}
-                       onChange={handleChange}/>
+                       onChange={handleChange} />
             </div>
-
-            <button type="submit"> SUBMIT </button>
+            <div>
+                <label>Password:</label>
+                <input type="password"
+                       name="password"
+                       value={user.password}
+                       onChange={handleChange} />
+            </div>
+            <div>
+                <label>Confirm Password:</label>
+                <input type="password"
+                       name="confirmPassword"
+                       value={user.confirmPassword}
+                       onChange={handleChange} />
+            </div>
+            <div>
+                <label>Date of Birth:</label>
+                <input type="date"
+                       name="dob"
+                       value={user.dob}
+                       onChange={handleChange} />
+            </div>
+            <button type="submit"> REGISTER </button>
         </form>
     </div>
   );
